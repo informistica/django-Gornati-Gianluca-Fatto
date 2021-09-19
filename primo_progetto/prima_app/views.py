@@ -9,3 +9,6 @@ def welcome(request):
   
 def lista(request):
   return render(request,"lista.html")
+  
+def chi_siamo(request):
+  return render(request,"chi_siamo.html")
