@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <title>Index</title>
-</head>
-<body>
+{% extends "base.html"%}
+
+{%block title%} {{block.super}} | Index {%endblock title%}
+
+{%block content%}
   <h1>Prima app</h1>
   <ol>
     <li><a href="{% url 'prima_app:homepage'%}">Home page benvenuto</a></li>
@@ -19,5 +17,4 @@
     <li><a href="{% url 'seconda_app:if_else_elif'%}">If else elif</a></li>
     <li><a href="{% url 'seconda_app:es_for'%}">Es for</a></li>
   </ol>
-</body>
-</html>
+{%endblock content%}
