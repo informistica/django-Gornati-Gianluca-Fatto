@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-(vz_wfv^ox9ibudqr4pxgdk&(4@5s$-=__h*s)2ef86o=jmlk7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["gornatigianluca.eu.pythonanywhere.com"]
+ALLOWED_HOSTS = ["gornatigianluca.eu.pythonanywhere.com","localhost"]
 
 
 # Application definition
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'prima_app',
+    'seconda_app',
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +62,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'prima_app/templates'),
             os.path.join(BASE_DIR, 'seconda_app/templates'),
             os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'news/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
