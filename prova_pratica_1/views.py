@@ -1,16 +1,35 @@
 from django.shortcuts import render
+from .models import Studente, Materia, Assenza, Voto
 
 # Create your views here.
 def view_b(request):
-  materie = ["Matematica","Italiano","Inglese","Storia","Geografia"]
+  materie = Materia.objects.all()
   context={}
   context['materie']=materie
   return render(request,"view_b.html",context)
   
 def view_c(request):
-  voti = {'Giuseppe Gullo':[("Matematica",9,0),("Italiano",7,3),("Inglese",7.5,4),("Storia",7.5,4),("Geografia",5,7)],
-           'Antonio Barbera':[("Matematica",8,1),("Italiano",6,1),("Inglese",9.5,0),("Storia",8,2),("Geografia",8,1)],
-           'Nicola Spina':[("Matematica",7.5,2),("Italiano",6,2),("Inglese",4,3),("Storia",8.5,2),("Geografia",8,2)]}
+  studenti=Studente.objects.all()
+  materie=Materia.objects.all()
+  votiTutti={}
+  for studente in studenti:
+    ris=[]
+    for materia in materie:
+      voti=Voto.objects.filter(studente=studente,materia=materia)
+      somma=0.0
+      if len(voti)!=0:
+        for voto in voti:
+          somma+=voto.valore
+        somma/=len(voti)
+      assenze=Assenza.objects.filter(studente=studente,materia=materia)
+      somma2=0.0
+      if len(assenze)!=0:
+        for assenza in assenze:
+          somma2+=assenza.valore
+        somma2/=len(assenze)
+      ris.append((materia,somma,somma2))
+    votiTutti[studente.nome+ " "+studente.cognome]=ris
   context={}
-  context['voti']=voti
+  context['voti']=votiTutti
+  print(votiTutti)
   return render(request,"view_c.html",context)
