@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}View b{% endblock title %}
+
+{% block content %}
+<h1>Materie:</h1>
+<ol>
+{% for materia in materie %}
+<li>{{materia}}</li>
+{% endfor %}
+</ol>
+{% endblock content %}

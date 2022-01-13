@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}View c{% endblock title %}
+
+{% block content %}
+<h1>Materie:</h1>
+{% for alunno,valutazioni in voti.items %}
+<ol>
+<li>{{alunno}}
+<ol>
+{% for materia in valutazioni %}
+<li>{{materia.0}},{{materia.1}},{{materia.2}}</li>
+{% endfor %}
+</ol>
+</li>
+</ol>
+{% endfor %}
+{% endblock content %}
