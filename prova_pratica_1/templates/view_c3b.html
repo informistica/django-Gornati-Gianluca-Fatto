@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}View c{% endblock title %}
+
+{% block content %}
+<h1>Voti di {{studente}}:</h1>
+<ol>
+  {%for valutazione in voti%}
+    <li>{{valutazione.0}}: Voto:{{valutazione.1|stringformat:".1f"}}, Assenze:{{valutazione.2|stringformat:".0f"}}</li>
+  {%endfor%}
+</ol>
+</div>
+{% endblock content %}

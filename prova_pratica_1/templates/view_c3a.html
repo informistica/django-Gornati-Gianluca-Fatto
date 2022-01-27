@@ -6,13 +6,12 @@
 <h1>Studenti:</h1>
 <ol>
 {% for alunno,valutazioni in voti.items %}
-<li>{{alunno}}
-<ol>
-{% for materia in valutazioni %}
-<li>{{materia.0}}: Voto:{{materia.1|stringformat:".2f"}}, Assenze:{{materia.2|stringformat:".0f"}}</li>
-{% endfor %}
-</ol>
+<li>
+<a href="{%url 'prova_pratica_1:view_c3b' valutazioni|last%}">
+  {{alunno}}
+</button>
 </li>
 {% endfor %}
 </ol>
+</div>
 {% endblock content %}

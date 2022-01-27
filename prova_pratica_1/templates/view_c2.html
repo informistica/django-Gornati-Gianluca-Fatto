@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}View c{% endblock title %}
+
+{% block content %}
+<h1>Studenti e voti:</h1>
+<ol>
+{% for alunno,valutazioni in voti.items %}
+<li>
+<button type="button" class="btn btn-link" data-toggle="modal" data-target="#studente{{forloop.counter}}">
+  {{alunno}}
+</button>
+<div class="modal fade text-left" id="studente{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel1">{{alunno}}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body" id="modal-body-default">
+            <ol>
+              {% for materia in valutazioni %}
+              <li>{{materia.0}}: Voto:{{materia.1|stringformat:".1f"}}, Assenze:{{materia.2|stringformat:".0f"}}</li>
+              {% endfor %}
+              </ol>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Chiudi</button>
+              <!-- <button type="button" class="btn btn-outline-primary">Save changes</button> -->
+          </div>
+      </div>
+  </div>
+</li>
+{% endfor %}
+</ol>
+</div>
+{% endblock content %}
