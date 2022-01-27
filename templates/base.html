@@ -60,6 +60,8 @@
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownApp2">
 							<a class="dropdown-item" href="{% url 'prova_pratica_1:view_b' %}">View b</a>
 							<a class="dropdown-item" href="{% url 'prova_pratica_1:view_c' %}">View c</a>
+							<a class="dropdown-item" href="{% url 'prova_pratica_1:view_c2' %}">View c2</a>
+							<a class="dropdown-item" href="{% url 'prova_pratica_1:view_c3a' %}">View c3</a>
 						</div>
 					</li>
 				</ul>
@@ -68,6 +70,7 @@
 
 		<div class="container my-4">
 			{%block content%} {%endblock content%}
+			{%block script%} {%endblock script%}
 		</div>
 	</body>
 </html>
