@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Materie{% endblock title %}
+
+{% block content %}
+<h1>Materie caricate tramite API:</h1>
+<ol id="lista">
+</ol>
+{% endblock content %}
+
+{% block script %}
+<script>
+  fetch("{%url 'prova_pratica_1:materie_list'%}").then(d=>d.json()).then(({materie})=>{
+    for(const {nome} of materie) {
+      const li=document.createElement("li");
+      li.innerText=nome;
+      document.getElementById("lista").appendChild(li);
+    }
+  });
+</script>
+{% endblock script %}

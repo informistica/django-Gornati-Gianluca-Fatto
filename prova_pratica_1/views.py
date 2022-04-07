@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+from django.http import JsonResponse
 from django.shortcuts import render
 from .models import Studente, Materia, Assenza, Voto
 
@@ -108,3 +110,28 @@ def view_c3b(request, studente):
   context['studente']=alunno
   print(votiTutti)
   return render(request,"view_c3b.html",context)
+  
+def materie_list(request):
+  materie=list(Materia.objects.all().values())
+  data={'materie':materie}
+  return JsonResponse(data)
+  
+def materia_detail(request,pk):
+  try:
+    materia=Materia.objects.get(pk=pk)
+    data={
+      "materia": {
+        "nome":materia.nome,
+      }
+    }
+  except Materia.DoesNotExist:
+    return JsonResponse({
+      "error": {
+        "code":404,
+        "message":"Materia non trovata!"
+      }
+    },status=404)
+  return JsonResponse(data)
+  
+def materie_api_view(request):
+  return render(request,"materia_list.html")
