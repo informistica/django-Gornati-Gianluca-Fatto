@@ -10,12 +10,14 @@
 
 {% block script %}
 <script>
-  fetch("{%url 'prova_pratica_1:materie_list'%}").then(d=>d.json()).then(({materie})=>{
+  (async function() {
+    const d=await fetch("{%url 'prova_pratica_1:materie_list'%}");
+    const {materie}=await d.json();
     for(const {nome} of materie) {
       const li=document.createElement("li");
       li.innerText=nome;
       document.getElementById("lista").appendChild(li);
     }
-  });
+  })();
 </script>
 {% endblock script %}
