@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+
+{%block title%}{{block.super}} | somma {%endblock title%}
+
+{%block content%}
+    {% if n1 < n2 %}
+    n1= <p style="color:red"><b><i>{{n1}}</i></b></p>
+    n2=<p style="color:green"><b><i>{{n2}}</i></b></p>
+    {% elif n1 > n2 %}
+    n1=<p style="color:green"><b><i>{{n1}}</i></b></p>
+    n2=<p style="color:red"><b><i>{{n2}}</i></b></p>
+    {% else %}
+    n1=<p><b><i>{{n1}}</i></b></p>
+    n2=<p><b><i>{{n2}}</i></b></p>
+    {%endif%}
+    somma={{somma}}
+{%endblock content%}
