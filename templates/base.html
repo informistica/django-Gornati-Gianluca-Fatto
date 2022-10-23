@@ -1,6 +1,7 @@
 {%load static%}
 <!DOCTYPE html>
 <html lang="it">
+	<!-- sezione head compressa, al suo interno i link per caricare le risorse del template  -->
 	<head>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -20,6 +21,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 	</head>
 	<body>
+		<!-- navbar compressa, al suo interno è presente il menù  -->
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 			<a class="navbar-brand" href="/">Primo Progetto</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,10 +71,13 @@
 				</ul>
 			</div>
 		</nav>
-
 		<div class="container my-4">
-			{%block content%} {%endblock content%}
-			{%block script%} {%endblock script%}
+			<!-- servirà per inserire i contenuti della pagina  -->
+			{%block content%} 
+			{%endblock content%}
+			<!-- servirà per inserire il codice javascript  -->
+			{%block script%} 
+			{%endblock script%}
 		</div>
 	</body>
 </html>
