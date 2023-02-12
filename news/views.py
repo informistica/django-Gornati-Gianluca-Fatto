@@ -4,6 +4,10 @@ from django.shortcuts import render
 from .models import Articolo,Giornalista
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.http import JsonResponse
+from django.core.serializers import serialize
+import json
+#https://www.letscodemore.com/blog/convert-queryset-to-json-in-django/
 
 # Create your views here.
 def home(request):
@@ -12,12 +16,13 @@ def home(request):
   context={'articoli':articoli,'giornalisti':giornalisti}
   print(context)
   return render(request,"homepage2.html",context)
-  
+
 def articoloDetailView(request,pk):
   # articolo=Articolo.objects.get(pk=pk)
   articolo=get_object_or_404(Articolo,pk=pk)
   context={'articolo':articolo}
   return render(request,"articolo_detail.html",context)
+
 
 class ArticoloDetailViewCB(DetailView):
   model=Articolo
@@ -44,3 +49,64 @@ class GiornalistaListView(ListView):
     context=super().get_context_data(**kwargs)
     context['giornalisti']=Giornalista.objects.all()
     return context
+
+
+
+def giornalisti_list_api(request):
+  giornalisti=Giornalista.objects.all()
+  data={'giornalisti':list(giornalisti.values("pk","nome","cognome"))}
+  response=JsonResponse(data)
+  return response
+
+def giornalista_api(request,pk):
+  try:
+    giornalista=Giornalista.objects.get(pk=pk)
+    data={'giornalista':{
+        "pk":giornalista.pk,
+        "nome":giornalista.nome,
+        "cognome":giornalista.cognome,
+        }
+    }
+    response=JsonResponse(data)
+  except Giornalista.DoesNotExist:
+      response=JsonResponse({
+        "error":{
+          "code":404,
+          "message":"Giornalista non trovato"
+        }},
+        status=404)
+  return response
+
+
+def articoli_list_api(request):
+  articoli=Articolo.objects.all()
+  data={'articoli':list(articoli.values("pk","titolo","contenuto","giornalista"))}
+  response=JsonResponse(data)
+  return response
+
+def articolo_api(request,pk):
+  try:
+    articolo=Articolo.objects.get(pk=pk)
+    serialized_data = serialize("json", articolo, use_natural_foreign_keys=True)
+    print(json.loads(serialized_data))
+    print(serialized_data)
+    data={'articolo':{
+        "titolo":articolo.titolo,
+        "contenuto":articolo.contenuto,
+        #"giornalisti":list(articolo.objects.giornalista.values()),
+        }
+    }
+    response=JsonResponse(data)
+  except articolo.DoesNotExist:
+      response=JsonResponse({
+        "error":{
+          "code":404,
+          "message":"articolo non trovato"
+        }},
+        status=404)
+  return response
+
+# serialized_data = serialize("json", books, use_natural_foreign_keys=True)
+# serialized_data = json.loads(serialized_data)
+# serialized_data
+ 
