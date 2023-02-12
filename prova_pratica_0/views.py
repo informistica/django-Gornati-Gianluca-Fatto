@@ -14,12 +14,13 @@ def somma(request):
 
 def media(request):
     lista=[]
+    l1=['a','b','c']
     somma=0
     for i in range(1,26):
         num=random.randint(1,11)
         somma+=num
         lista.append(num)
     media=somma/25
-    context={'lista':lista,'media':media}
+    context={'lista':lista,'media':media,'l1':l1,'oggetto':{'nome':'mauro','cognome':'spina'}}
     return render(request,"media.html",context)
   
