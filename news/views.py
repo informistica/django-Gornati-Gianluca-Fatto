@@ -87,17 +87,16 @@ def articoli_list_api(request):
 def articolo_api(request,pk):
   try:
     articolo=Articolo.objects.get(pk=pk)
-    serialized_data = serialize("json", articolo, use_natural_foreign_keys=True)
-    print(json.loads(serialized_data))
-    print(serialized_data)
     data={'articolo':{
         "titolo":articolo.titolo,
         "contenuto":articolo.contenuto,
-        #"giornalisti":list(articolo.objects.giornalista.values()),
+        "giornalista":{"pk":articolo.giornalista.pk,
+                       "nome":articolo.giornalista.nome,
+                       "cognome":articolo.giornalista.cognome }
         }
     }
     response=JsonResponse(data)
-  except articolo.DoesNotExist:
+  except Articolo.DoesNotExist:
       response=JsonResponse({
         "error":{
           "code":404,
@@ -105,8 +104,3 @@ def articolo_api(request,pk):
         }},
         status=404)
   return response
-
-# serialized_data = serialize("json", books, use_natural_foreign_keys=True)
-# serialized_data = json.loads(serialized_data)
-# serialized_data
- 
